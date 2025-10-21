@@ -58,7 +58,7 @@ const Index = () => {
       const formData = new FormData();
       formData.append('image', file);
 
-      const response = await fetch('https://994e306e3e25.ngrok-free.app/webhook-test/ai-meal', {
+      const response = await fetch('https://994e306e3e25.ngrok-free.app/webhook/ai-meal', {
         method: 'POST',
         body: formData,
       });
