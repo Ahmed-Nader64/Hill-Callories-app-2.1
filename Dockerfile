@@ -19,8 +19,11 @@ RUN npm run build
 # Remove dev dependencies after build
 RUN npm prune --production
 
+# Install a simple HTTP server
+RUN npm install -g serve
+
 # Expose port
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0", "--port", "3000"]
+# Start the application by serving the built files
+CMD ["serve", "-s", "dist", "-l", "3000"]
