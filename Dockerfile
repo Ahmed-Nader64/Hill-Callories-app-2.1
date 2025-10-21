@@ -1,5 +1,5 @@
-# Multi-stage build
-FROM node:20-alpine AS builder
+# Use Node.js 20 Alpine
+FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install ALL dependencies (including dev dependencies for build)
+# Install dependencies
 RUN npm ci
 
 # Copy source code
@@ -16,17 +16,19 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Production stage with nginx
-FROM nginx:alpine
+# Install serve globally
+RUN npm install -g serve
 
-# Copy built files to nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Remove dev dependencies
+RUN npm prune --production
 
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Create startup script
+RUN echo '#!/bin/sh' > /app/start.sh && \
+    echo 'serve -s dist -l ${PORT:-3000}' >> /app/start.sh && \
+    chmod +x /app/start.sh
 
 # Expose port
-EXPOSE 80
+EXPOSE 3000
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start the application
+CMD ["/app/start.sh"]
