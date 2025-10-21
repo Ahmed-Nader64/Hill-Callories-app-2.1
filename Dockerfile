@@ -1,5 +1,5 @@
-# Use Node.js 20 Alpine as base image
-FROM node:20-alpine
+# Multi-stage build
+FROM node:20-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -16,19 +16,25 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Remove dev dependencies after build
-RUN npm prune --production
+# Production stage with nginx
+FROM nginx:alpine
 
-# Install a simple HTTP server
-RUN npm install -g serve
+# Copy built files to nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Create a startup script
-RUN echo '#!/bin/sh' > /app/start.sh && \
-    echo 'serve -s dist -l ${PORT:-3000}' >> /app/start.sh && \
-    chmod +x /app/start.sh
+# Copy nginx configuration
+RUN echo 'server {' > /etc/nginx/conf.d/default.conf && \
+    echo '    listen 80;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    server_name localhost;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    root /usr/share/nginx/html;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    index index.html;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    location / {' >> /etc/nginx/conf.d/default.conf && \
+    echo '        try_files $uri $uri/ /index.html;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    }' >> /etc/nginx/conf.d/default.conf && \
+    echo '}' >> /etc/nginx/conf.d/default.conf
 
 # Expose port
-EXPOSE 3000
+EXPOSE 80
 
-# Start the application
-CMD ["/app/start.sh"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
