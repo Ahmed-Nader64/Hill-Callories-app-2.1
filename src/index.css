@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hill Calories AI Design System - Health & Nutrition Focused */
+
+@layer base {
+  :root {
+    /* Base Colors - Clean & Medical */
+    --background: 0 0% 100%;
+    --foreground: 210 24% 16%;
+
+    /* Card System */
+    --card: 0 0% 100%;
+    --card-foreground: 210 24% 16%;
+
+    /* Popover System */
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 24% 16%;
+
+    /* Health Green Primary - Fresh & Trustworthy */
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 142 76% 32%;
+
+    /* Clean Secondary */
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 210 24% 16%;
+
+    /* Subtle Muted */
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Food Orange Accent - Warm & Appetizing */
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 98%;
+    --accent-hover: 25 95% 48%;
+
+    /* Trust Blue - Professional */
+    --trust: 217 91% 60%;
+    --trust-foreground: 0 0% 98%;
+
+    /* Nutrition Colors */
+    --protein: 330 81% 60%;
+    --carbs: 47 96% 56%;
+    --fat: 25 95% 53%;
+
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --warning: 47 96% 56%;
+    --warning-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* UI Elements */
+    --border: 210 20% 88%;
+    --input: 210 20% 96%;
+    --ring: 142 76% 36%;
+
+    /* Enhanced Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 42%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(142 70% 45%) 30%, hsl(217 91% 60%) 100%);
+    --gradient-hero-overlay: radial-gradient(ellipse at top left, hsl(142 76% 36% / 0.8) 0%, hsl(217 91% 60% / 0.6) 50%, hsl(142 76% 30% / 0.9) 100%);
+    --gradient-food: linear-gradient(135deg, hsl(25 95% 53%), hsl(47 96% 56%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 20% 98%));
+
+    /* Shadows */
+    --shadow-soft: 0 2px 10px -2px hsl(210 24% 16% / 0.1);
+    --shadow-medium: 0 8px 30px -12px hsl(210 24% 16% / 0.15);
+    --shadow-strong: 0 20px 40px -12px hsl(210 24% 16% / 0.2);
+    --shadow-glow: 0 0 40px hsl(142 76% 36% / 0.3);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark Base */
+    --background: 210 24% 8%;
+    --foreground: 0 0% 98%;
+
+    /* Dark Cards */
+    --card: 210 24% 10%;
+    --card-foreground: 0 0% 98%;
+
+    /* Dark Popover */
+    --popover: 210 24% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Dark Primary - Keep Health Green */
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 142 76% 40%;
+
+    /* Dark Secondary */
+    --secondary: 210 24% 16%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Dark Muted */
+    --muted: 210 24% 16%;
+    --muted-foreground: 215 16% 65%;
+
+    /* Dark Accent - Keep Food Orange */
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 98%;
+    --accent-hover: 25 95% 58%;
+
+    /* Dark Trust Blue */
+    --trust: 217 91% 60%;
+    --trust-foreground: 0 0% 98%;
+
+    /* Dark Status */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --warning: 47 96% 56%;
+    --warning-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Dark UI */
+    --border: 210 24% 20%;
+    --input: 210 24% 16%;
+    --ring: 142 76% 36%;
+
+    /* Dark Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 42%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 76% 36%), hsl(217 91% 60%));
+    --gradient-food: linear-gradient(135deg, hsl(25 95% 53%), hsl(47 96% 56%));
+    --gradient-card: linear-gradient(135deg, hsl(210 24% 10%), hsl(210 24% 12%));
+
+    /* Dark Shadows */
+    --shadow-soft: 0 2px 10px -2px hsl(0 0% 0% / 0.3);
+    --shadow-medium: 0 8px 30px -12px hsl(0 0% 0% / 0.4);
+    --shadow-strong: 0 20px 40px -12px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 40px hsl(142 76% 36% / 0.4);
+
+    /* Sidebar Dark */
+    --sidebar-background: 210 24% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 210 24% 16%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 210 24% 20%;
+    --sidebar-ring: 142 76% 36%;
+  }
+}
+
+@layer components {
+  /* Clean Hero Components */
+  .hero-background {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+  }
+  
+  .food-gradient {
+    background: var(--gradient-food);
+  }
+  
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+
+  /* Custom Shadows */
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-strong {
+    box-shadow: var(--shadow-strong);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Upload Area Styles */
+  .upload-area {
+    @apply border-2 border-dashed border-border rounded-lg p-8 text-center transition-all duration-300;
+    @apply hover:border-primary hover:bg-muted/50;
+  }
+  
+  .upload-area.drag-over {
+    @apply border-primary bg-primary/5 shadow-glow;
+  }
+
+  /* Nutrition Cards */
+  .nutrition-card {
+    @apply bg-card rounded-lg p-6 shadow-medium border border-border;
+    background: var(--gradient-card);
+  }
+
+  /* Smooth Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+}
+
+@layer utilities {
+  /* Text Gradients */
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-food {
+    background: var(--gradient-food);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Custom Keyframes */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.6); }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
