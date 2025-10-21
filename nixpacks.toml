@@ -1,11 +1,2 @@
-[phases.setup]
-nixPkgs = ["nodejs"]
-
-[phases.install]
-cmds = ["npm ci"]
-
-[phases.build]
-cmds = ["npm run build"]
-
-[start]
-cmd = "npm run preview -- --host 0.0.0.0 --port $PORT"
+# This file is not used when using Dockerfile
+# Railway will use the Dockerfile instead
