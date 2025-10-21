@@ -22,8 +22,13 @@ RUN npm prune --production
 # Install a simple HTTP server
 RUN npm install -g serve
 
+# Create a startup script
+RUN echo '#!/bin/sh' > /app/start.sh && \
+    echo 'serve -s dist -l ${PORT:-3000}' >> /app/start.sh && \
+    chmod +x /app/start.sh
+
 # Expose port
 EXPOSE 3000
 
-# Start the application by serving the built files
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# Start the application
+CMD ["/app/start.sh"]
