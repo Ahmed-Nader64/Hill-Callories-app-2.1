@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -85,7 +85,7 @@ const History = () => {
     }
   };
 
-  const fetchMeals = async () => {
+  const fetchMeals = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('meal_analyses')
@@ -106,7 +106,7 @@ const History = () => {
         variant: "destructive",
       });
     }
-  };
+  }, [toast]);
 
   const fetchCalorieGoals = async () => {
     try {
@@ -295,7 +295,7 @@ const History = () => {
     }
   };
 
-  const calculateSummary = (startDate: Date, endDate: Date): NutritionSummary => {
+  const calculateSummary = useCallback((startDate: Date, endDate: Date): NutritionSummary => {
     const filteredMeals = meals.filter(meal => {
       const mealDate = new Date(meal.analyzed_at);
       return mealDate >= startDate && mealDate <= endDate;
@@ -334,12 +334,12 @@ const History = () => {
     }
 
     return summary;
-  };
+  }, [meals, currentGoal]);
 
   const now = new Date();
-  const dailySummary = calculateSummary(startOfDay(now), endOfDay(now));
-  const monthlySummary = calculateSummary(startOfMonth(now), endOfMonth(now));
-  const yearlySummary = calculateSummary(startOfYear(now), endOfYear(now));
+  const dailySummary = useMemo(() => calculateSummary(startOfDay(now), endOfDay(now)), [calculateSummary, now]);
+  const monthlySummary = useMemo(() => calculateSummary(startOfMonth(now), endOfMonth(now)), [calculateSummary, now]);
+  const yearlySummary = useMemo(() => calculateSummary(startOfYear(now), endOfYear(now)), [calculateSummary, now]);
 
   const SummaryCard = ({ title, summary, icon }: { title: string; summary: NutritionSummary; icon: React.ReactNode }) => (
     <Card className="p-6 space-y-4">
