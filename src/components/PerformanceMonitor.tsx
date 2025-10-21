@@ -1,27 +1,30 @@
 import { useEffect } from 'react';
-import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
 
 export const PerformanceMonitor = () => {
   useEffect(() => {
-    // Monitor Core Web Vitals
-    getCLS((metric) => {
-      console.log('CLS:', metric);
-    });
-    
-    getFID((metric) => {
-      console.log('FID:', metric);
-    });
-    
-    getFCP((metric) => {
-      console.log('FCP:', metric);
-    });
-    
-    getLCP((metric) => {
-      console.log('LCP:', metric);
-    });
-    
-    getTTFB((metric) => {
-      console.log('TTFB:', metric);
+    // Monitor Core Web Vitals with dynamic import
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS((metric) => {
+        console.log('CLS:', metric);
+      });
+      
+      getFID((metric) => {
+        console.log('FID:', metric);
+      });
+      
+      getFCP((metric) => {
+        console.log('FCP:', metric);
+      });
+      
+      getLCP((metric) => {
+        console.log('LCP:', metric);
+      });
+      
+      getTTFB((metric) => {
+        console.log('TTFB:', metric);
+      });
+    }).catch((error) => {
+      console.log('Web Vitals not available:', error);
     });
 
     // Monitor bundle size in development
